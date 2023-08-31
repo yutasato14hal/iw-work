@@ -9,7 +9,6 @@
 </template>
 
 <script>
-import styled from '@emotion/styled';
 
 export default {
   props: {
