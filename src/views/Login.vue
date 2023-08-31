@@ -72,14 +72,14 @@ export default {
     submit() {
       if (this.isLogin) {
         // ログイン処理
-        localStorage.setItem('userId', this.user.userId);
+        sessionStorage.setItem('userId', this.user.userId);
         // 他のログイン処理
         alert("ろぐいんかんりょう！")
         this.$router.push({ name: 'home' });
       } else {
         // 新規登録処理
-        localStorage.setItem('userId', this.user.userId);
-        localStorage.setItem('age', this.user.age); 
+        sessionStorage.setItem('userId', this.user.userId);
+        sessionStorage.setItem('age', this.user.age); 
         alert("とうろくかんりょう！")
         this.$router.push({ name: 'home' });
         // 他の新規登録処理
