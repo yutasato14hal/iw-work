@@ -17,5 +17,10 @@ export default defineConfig({
     watch: {
       usePolling: true
     }
-  }
+  },
+  build: {
+    rollupOptions: {
+      external: ['@emotion/styled'],
+    },
+  },
 })
