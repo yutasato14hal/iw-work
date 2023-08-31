@@ -59,7 +59,10 @@ export default {
     },
   },
   mounted() {
+    if (!window.localStorage.getItem("firstLoadDone")) {
     this.loadData();
+    window.localStorage.setItem("firstLoadDone", "true");
+  }
   },
 };
 </script>

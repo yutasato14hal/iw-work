@@ -29,7 +29,7 @@ export default {
   data() {
     return {
       questionState: 'initial',
-      qText: 'しつもんをはじめます！'
+      qText: 'しつもんをはじめます！',
     };
   },
 
@@ -61,7 +61,7 @@ export default {
           this.qText = 'なくしものには気を付けてね！ばいばい！';
           this.questionState = 'question2No';
         }
-      }else if (this.questionState === 'question2Yes'){
+      } else if (this.questionState === 'question2Yes') {
         // 'yes' が選択された後に行う処理
         if (answer === 'yes') {
           this.qText = '家でなくしましたか？';
@@ -70,57 +70,101 @@ export default {
           this.qText = 'なくしものには気を付けてね！ばいばい！';
           this.questionState = 'question3No';
         }
-      }else if (this.questionState === 'question3Yes'){
+      } else if (this.questionState === 'question3Yes') {
         // 'yes' が選択された後に行う処理
         if (answer === 'yes') {
-          this.qText = "まずは服や鞄のポケットをさがしてみましょう！見つかりましたか？";
+          this.qText =
+            'まずは服や鞄のポケットをさがしてみましょう！見つかりましたか？';
           this.questionState = 'question4Yes';
         } else {
-          this.qText = '心当たりのあるお店や公共交通機関に電話でききましょう！見つかりましたか？';
+          this.qText =
+            '心当たりのあるお店や公共交通機関に電話でききましょう！見つかりましたか？';
           this.questionState = 'question4No';
         }
-      }else if (this.questionState === 'question4Yes'){
+      } else if (this.questionState === 'question4Yes') {
         // 'yes' が選択された後に行う処理
         if (answer === 'yes') {
           this.qText = 'おめでとうございます！次も気を付けてくださいね！';
           this.questionState = 'question5Yes';
+
+          const currentDate = new Date();
+          const memoryData = {
+            date: currentDate.toLocaleDateString(),
+            time: currentDate.toLocaleTimeString(),
+            message: '服や鞄のポケットで発見！',
+          };
+
+          let memories = JSON.parse(localStorage.getItem('memories')) || [];
+          memories.push(memoryData);
+          localStorage.setItem('memories', JSON.stringify(memories));
         } else {
-          this.qText = '次に、家具の隙間やベッドの下をかくにんしましょう！見つかりましたか？';
+          this.qText =
+            '次に、家具の隙間やベッドの下をかくにんしましょう！見つかりましたか？';
           this.questionState = 'question5No';
         }
-      }else if (this.questionState === 'question4No'){
+      } else if (this.questionState === 'question4No') {
         // 'yes' が選択された後に行う処理
         if (answer === 'yes') {
           this.qText = 'おめでとうございます！次も気を付けてくださいね！';
           this.questionState = 'question6Yes';
+
+          const currentDate = new Date();
+          const memoryData = {
+            date: currentDate.toLocaleDateString(),
+            time: currentDate.toLocaleTimeString(),
+            message: 'お店や公共交通機関に電話して発見！',
+          };
+
+          let memories = JSON.parse(localStorage.getItem('memories')) || [];
+          memories.push(memoryData);
+          localStorage.setItem('memories', JSON.stringify(memories));
         } else {
-          this.qText = '近くの交番に電話してかくにんしましょう！見つかりましたか？';
+          this.qText =
+            '近くの交番に電話してかくにんしましょう！見つかりましたか？';
           this.questionState = 'question6No';
         }
-      
-      }else if (this.questionState === 'question5No'){
+      } else if (this.questionState === 'question5No') {
         // 'yes' が選択された後に行う処理
         if (answer === 'yes') {
           this.qText = 'おめでとうございます！次も気を付けてくださいね！';
           this.questionState = 'question7Yes';
+
+          const currentDate = new Date();
+          const memoryData = {
+            date: currentDate.toLocaleDateString(),
+            time: currentDate.toLocaleTimeString(),
+            message: '家具の隙間やベッドの下で発見！',
+          };
+
+          let memories = JSON.parse(localStorage.getItem('memories')) || [];
+          memories.push(memoryData);
+          localStorage.setItem('memories', JSON.stringify(memories));
         } else {
-          this.qText = '予想結果：身に着けている可能性が高いです！';
+          this.qText = '予想結果：何かと一緒に洗濯してしまった可能性が高いです！';
           this.questionState = 'question7No';
         }
-      }
-      else if (this.questionState === 'question6No'){
+      } else if (this.questionState === 'question6No') {
         // 'yes' が選択された後に行う処理
         if (answer === 'yes') {
           this.qText = 'おめでとうございます！次も気を付けてくださいね！';
           this.questionState = 'question7Yes';
+
+          const currentDate = new Date();
+          const memoryData = {
+            date: currentDate.toLocaleDateString(),
+            time: currentDate.toLocaleTimeString(),
+            message: '近くの交番に電話して発見！',
+          };
+
+          let memories = JSON.parse(localStorage.getItem('memories')) || [];
+          memories.push(memoryData);
+          localStorage.setItem('memories', JSON.stringify(memories));
         } else {
-          this.qText ="予想結果：車の中の可能性が高いです！";
+          this.qText = '予想結果：車の中の可能性が高いです！';
           this.questionState = 'question7No';
         }
-      
       }
-    }
-    // 他の状態に対する処理をここに追加
+    },
   },
 };
 </script>

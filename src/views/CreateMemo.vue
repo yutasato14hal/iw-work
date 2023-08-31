@@ -8,36 +8,42 @@ import { RouterLink, RouterView } from 'vue-router';
       <div class="subHeaderCon"><RouterLink to="/"><img style="width:200px" src="../assets/logo.png" alt=""></RouterLink></div>
     </header>
     <div class="content">
-      <textarea name="newMemo" id="newMemo" cols="30" rows="10"></textarea>
+      <textarea name="newMemo" id="newMemo" cols="30" rows="10" v-model="memoText"></textarea>
     </div>
     <div class="colors">
-      <div class="color red"></div>
-      <div class="color blue"></div>
-      <div class="color green"></div>
-      <div class="color yellow"></div>
-      <div class="color pink"></div>
-      <div class="color orange"></div>
-    </div>
-    <RouterLink class="newMemo" to="/memo">メモをさくせい</RouterLink>
+  <div class="color red" @click="selectedColor = 'red'"></div>
+  <div class="color blue" @click="selectedColor = 'blue'"></div>
+  <div class="color green" @click="selectedColor = 'green'"></div>
+  <div class="color yellow" @click="selectedColor = 'yellow'"></div>
+  <div class="color pink" @click="selectedColor = 'pink'"></div>
+  <div class="color orange" @click="selectedColor = 'orange'"></div>
+</div>
+<RouterLink class="newMemo" to="/memo" @click.native="createMemo">メモをさくせい</RouterLink>
+
+
   </div>
   <RouterView />
 </template>
-<script>
-export default {
+<script>export default {
   name:'createMemo',
-  components: {
-    // Loading,
-   
-  },
   data() {
     return {
-      
+      memoText: '',  // このプロパティが新しく追加されます
+      selectedColor: 'white'
     };
   },
   methods: {
-  
+    createMemo() {
+      const newMemo = {
+        text: this.memoText,  // ここで textarea の内容が使われます
+        color: this.selectedColor
+      };
+      
+      let memos = JSON.parse(localStorage.getItem('memos')) || [];
+      memos.push(newMemo);
+      localStorage.setItem('memos', JSON.stringify(memos));
+    }
   },
- 
 };
 </script>
 

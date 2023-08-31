@@ -9,9 +9,10 @@ import { RouterLink, RouterView } from 'vue-router';
       <div class="subHeaderCon"><RouterLink to="/"><img style="width:200px" src="../assets/logo.png" alt=""></RouterLink></div>
     </header>
     <div class="memos">
-      <div class="memo green"><p>これはメモです</p></div>
-      <div class="memo yellow"><p>いえのかぎ</p></div>
-    </div>
+  <div class="memo" :class="memo.color" v-for="memo in memos" :key="memo.text">
+    <p>{{ memo.text }}</p>
+  </div>
+</div>
     <RouterLink class="newMemo" to="/createMemo">あたらしくメモる</RouterLink>
   </div>
   <RouterView />
@@ -19,20 +20,17 @@ import { RouterLink, RouterView } from 'vue-router';
 <script>
 export default {
   name:'memo',
-  components: {
-    // Loading,
-   
-  },
   data() {
     return {
-      
+      memos: [],
     };
   },
-  methods: {
-  
+  mounted() {
+    // ローカルストレージからメモを取得してセット
+    this.memos = JSON.parse(localStorage.getItem('memos')) || [];
   },
-  
 };
+
 </script>
 
 <style scoped>
